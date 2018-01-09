@@ -1,3 +1,5 @@
+'use strict'
+
 const request = require('request');
 const app = require('../app/server.js');
 
@@ -14,7 +16,7 @@ describe("Server Route Test",()=>{
       });
       it("contains valid html",(done)=>{
         request.get(base_url,(error,response,body)=>{
-          expect(body).toContain("<h1>Hello, You are from");
+          expect(body).toContain("Hello, You are from");
           done();
         });
       });
