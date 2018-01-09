@@ -1,5 +1,3 @@
-/*jshint esversion: 6 */
-
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
@@ -26,14 +24,19 @@ app.get('/api/crashme',(req,res)=>{
 app.get('/',(req,res)=>{
   let hello = '<h1>Hello, You are from IP_ADDRESS</h1>';
   let newHello = hello.replace(/IP_ADDRESS/g,req.headers['x-forwarded-for'] || req.connection.remoteAddress);
-  res.send(newHello);
+  res.staus(200).send(newHello);
 });
 
-app.listen(3000,(error)=>{
+if (process.env.VCAP_SERVICES){
+  console.log(JSON.parse(process.env.VCAP_SERVICES));
+}
+
+const port = process.env.PORT || 3000;
+app.listen(port,(error)=>{
   if (error){
     console.error(error.message);
     process.exit(1);
   }else{
-    console.log("Server is running and listening on port 3000");
+    console.log(`Server is running and listening on port ${port}`);
   }
 });
