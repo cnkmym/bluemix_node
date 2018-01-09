@@ -23,7 +23,7 @@ app.get('/api/crashme',(req,res)=>{
 });
 
 app.get('/',(req,res)=>{
-  let hello = '<h1>Hello, You are from IP_ADDRESS</h1>';
+  let hello = 'Hello, You are from IP_ADDRESS';
   let newHello = hello.replace(/IP_ADDRESS/g,req.headers['x-forwarded-for'] || req.connection.remoteAddress);
   res.status(200).send(newHello);
 });
