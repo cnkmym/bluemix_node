@@ -1,4 +1,5 @@
 const request = require('request');
+const app = require('../app/server.js');
 
 const base_url = "http://localhost:"+(process.env.PORT||3000);
 
@@ -23,9 +24,16 @@ describe("Server Route Test",()=>{
     let path = "/api/whoami";
     it("listens on api calls",()=>{
       request.get(base_url+path,(error,response,body)=>{
-        expect(body).contains("I am server instance on");
+        expect(body).contains("I am server instance on1");
         done();
       });
     });
   });
+
+  describe("Clean up",()=>{
+    it("shutdown the Server",()=>{
+      expect(app.closeServer()).toBe(true);
+    })
+  })
+
 });

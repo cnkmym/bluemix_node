@@ -2,5 +2,5 @@
   applications:
   - name: nodejs-sample-11323
     memory: 64M
-    instances: 2
+    instances: 1
     health-check-type: process

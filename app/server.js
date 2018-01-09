@@ -33,7 +33,7 @@ if (process.env.VCAP_SERVICES){
 }
 
 const port = process.env.PORT || 3000;
-app.listen(port,(error)=>{
+let server = app.listen(port,(error)=>{
   if (error){
     console.error(error.message);
     process.exit(1);
@@ -42,3 +42,16 @@ app.listen(port,(error)=>{
     console.log(`Current Code version is ${version.branch}`);
   }
 });
+
+module.exports = {
+  closeServer : ()=>{
+    if (server){
+      server.close(()=>{
+        console.log("Server is shutdown");
+      });
+      return true;
+    }else{
+      return false;
+    }
+  }
+}
