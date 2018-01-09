@@ -6,15 +6,15 @@ const base_url = "http://localhost:"+(process.env.PORT||3000);
 describe("Server Route Test",()=>{
 
   describe("GET /", ()=>{
-      it("returns status code 200",()=>{
+      it("returns status code 200",(done)=>{
         request.get(base_url,(error,response,body)=>{
           expect(response.statusCode).toBe(200);
           done();
         });
       });
-      it("contains valid html",()=>{
+      it("contains valid html",(done)=>{
         request.get(base_url,(error,response,body)=>{
-          expect(body).contains("<h1>Hello, You are from");
+          expect(body).toContain("<h1>Hello, You are from");
           done();
         });
       });
@@ -22,18 +22,15 @@ describe("Server Route Test",()=>{
 
   describe("GET /api/*", ()=>{
     let path = "/api/whoami";
-    it("listens on api calls",()=>{
+    it("listens on api calls",(done)=>{
       request.get(base_url+path,(error,response,body)=>{
-        expect(body).contains("I am server instance on1");
+        expect(body).toContain("I am server instance on");
         done();
       });
     });
   });
 
-  describe("Clean up",()=>{
-    it("shutdown the Server",()=>{
-      expect(app.closeServer()).toBe(true);
-    })
-  })
-
+  afterAll(function(){
+    expect(app.closeServer()).toBe(true);
+  });
 });
