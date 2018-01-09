@@ -3,6 +3,7 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const errorhandler = require('errorhandler');
 const ip = require('ip');
+const version = require('../version.json');
 
 const app = express();
 app.use(logger('dev'));
@@ -38,5 +39,6 @@ app.listen(port,(error)=>{
     process.exit(1);
   }else{
     console.log(`Server is running and listening on port ${port}`);
+    console.log(`Current Code version is ${version.branch}`);
   }
 });
