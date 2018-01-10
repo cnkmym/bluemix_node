@@ -2,12 +2,15 @@
   'use strict';
 
   const controller = require(__dirname + '/../../app/controller.js');
+  const chai = require('chai');
+  const spies = require('chai-spies');
+
+  chai.use(spies);
+  var expect = chai.expect;
 
   describe('Controller', () => {
     it("method general should work", () => {
-      var obj = spyOn(controller, 'general').and.callThrough();
       const route = controller.general;
-      expect(obj).toEqual(route);
       const reqMock = {
         headers: {
           'x-forwarded-for': ["localhost1","remotehost2"]
@@ -26,9 +29,8 @@
         }
       };
       route(reqMock, resMock);
-      expect(obj).toHaveBeenCalled();
-      expect(resStatus).toEqual(200);
-      expect(resBody).toContain('Hello, You are from');
+      expect(resStatus).to.equal(200);
+      expect(resBody).to.include('Hello, You are from');
     });
 
     it("method whoami should work", () => {
@@ -46,15 +48,15 @@
         }
       };
       route("", resMock);
-      expect(resStatus).toEqual(200);
-      expect(resBody).toContain('I am server instance on');
+      expect(resStatus).to.equal(200);
+      expect(resBody).to.include('I am server instance on');
     });
 
     it("method crashme should work", () => {
       let route = controller.crashme;
-      let crashMethod = jasmine.createSpy('crashMethod');
+      let crashMethod = chai.spy();
       route("", "", "", crashMethod);
-      expect(crashMethod).toHaveBeenCalled();
+      expect(crashMethod).to.have.been.called();
     });
 
   });
