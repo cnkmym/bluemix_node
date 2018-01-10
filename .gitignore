@@ -1,3 +1,4 @@
 node_modules/
 coverage/
-testResult/**/*.json
+testResult/integration/*.json
+testResult/unit/*.json
