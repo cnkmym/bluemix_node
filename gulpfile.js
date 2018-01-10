@@ -13,41 +13,62 @@ gulp.task('pre-test', function () {
 gulp.task("test", ["pre-test"], function() {
   return gulp.src(["./test/**/*.js"], {read: false})
   .pipe(mocha({
-    reporter: "mochawesome",
-    timeout: "5000",
+    reporter: "mocha-junit-reporter",
     reporterOptions: {
-      reportFilename: 'mochaTestResultSummary',
-      quiet: true
+      mochaFile: './testResult/testResult-summary.xml'
     }
   }))
-    .pipe(istanbul.writeReports('coverage/summary'))
+    .pipe(istanbul.writeReports(
+      {
+        dir: './coverage/summary',
+        reporters: [ 'lcov', 'json', 'json-summary' ],
+        reportOpts: {
+          'json': {dir:'./coverage/summary/',file: 'converage.json'},
+          'json-summary': {dir:'./coverage/summary/',file: 'json-summary.json'}
+        }
+      }
+    ))
     .pipe(istanbul.enforceThresholds({ thresholds: { global: 90 } }));
 });
 
 gulp.task("test-unit", ["pre-test"], function() {
   return gulp.src(["./test/unit/**/*.js"], {read: false})
     .pipe(mocha({
-      reporter: "mochawesome",
-      timeout: "5000",
+      reporter: "mocha-junit-reporter",
       reporterOptions: {
-        reportFilename: 'mochaUnitTestResult',
-        quiet: true
+        mochaFile: './testResult/testResult-unit.xml'
       }
     }))
-    .pipe(istanbul.writeReports('coverage/unit'))
+    .pipe(istanbul.writeReports(
+      {
+        dir: './coverage/unit',
+        reporters: [ 'lcov', 'json', 'json-summary' ],
+        reportOpts: {
+          'json': {dir:'./coverage/unit/',file: 'converage.json'},
+          'json-summary': {dir:'./coverage/unit/',file: 'json-summary.json'}
+        }
+      }
+    ))
     .pipe(istanbul.enforceThresholds({ thresholds: { global: 40 } }));
 });
 
 gulp.task("test-integration", ["pre-test"], function() {
   return gulp.src(["./test/integration/**/*.js"], {read: false})
     .pipe(mocha({
-      reporter: "mochawesome",
-      timeout: "5000",
+      reporter: "mocha-junit-reporter",
       reporterOptions: {
-        reportFilename: 'mochaIntegrationTestResult',
-        quiet: true
+        mochaFile: './testResult/testResult-integration.xml'
       }
     }))
-    .pipe(istanbul.writeReports('coverage/integration'))
+    .pipe(istanbul.writeReports(
+      {
+        dir: './coverage/integration',
+        reporters: [ 'lcov', 'json', 'json-summary' ],
+        reportOpts: {
+          'json': {dir:'./coverage/integration/',file: 'converage.json'},
+          'json-summary': {dir:'./coverage/integration/',file: 'json-summary.json'}
+        }
+      }
+    ))
     .pipe(istanbul.enforceThresholds({ thresholds: { global: 40 } }));
 });
