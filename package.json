@@ -22,7 +22,7 @@
     "test": "npm run unit && npm run integration && npm run report",
     "unit": "./node_modules/.bin/istanbul cover --dir ./coverage/unit ./node_modules/.bin/_mocha ./test/unit --recursive",
     "integration": "./node_modules/.bin/istanbul cover --dir ./coverage/integration ./node_modules/.bin/_mocha ./test/integration --recursive",
-    "report":"./node_modules/.bin/istanbul report",
+    "report": "./node_modules/.bin/istanbul report",
     "start": "node app/server.js"
   },
   "repository": {
