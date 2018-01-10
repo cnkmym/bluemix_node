@@ -13,7 +13,7 @@
       const route = controller.general;
       const reqMock = {
         headers: {
-          'x-forwarded-for': ["localhost1","remotehost2"]
+          'x-forwarded-for': ["localhost1", "remotehost2"]
         }
       };
       let resStatus = -1;
@@ -54,7 +54,9 @@
 
     it("method crashme should work", () => {
       let route = controller.crashme;
-      let crashMethod = chai.spy();
+      let crashMethod = chai.spy(() => {
+        console.log("Unit Test");
+      });
       route("", "", "", crashMethod);
       expect(crashMethod).to.have.been.called();
     });

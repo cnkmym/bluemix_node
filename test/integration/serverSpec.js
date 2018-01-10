@@ -28,9 +28,9 @@
     });
 
     describe("GET /api/*", () => {
-      let path = "/api/whoami";
+      let crashme = "/api/whoami";
       it("listens on api calls", (done) => {
-        request.get(base_url + path, (error, response, body) => {
+        request.get(base_url + crashme, (error, response, body) => {
           expect(body).to.include("I am server instance on");
           done();
         });
