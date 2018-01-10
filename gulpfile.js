@@ -23,7 +23,7 @@ gulp.task("test", ["pre-test"], function() {
         dir: './coverage/summary',
         reporters: [ 'lcov', 'json', 'json-summary' ],
         reportOpts: {
-          'json': {dir:'./coverage/summary/',file: 'converage.json'},
+          'json': {dir:'./coverage/summary/',file: 'coverage.json'},
           'json-summary': {dir:'./coverage/summary/',file: 'json-summary.json'}
         }
       }
@@ -44,7 +44,7 @@ gulp.task("test-unit", ["pre-test"], function() {
         dir: './coverage/unit',
         reporters: [ 'lcov', 'json', 'json-summary' ],
         reportOpts: {
-          'json': {dir:'./coverage/unit/',file: 'converage.json'},
+          'json': {dir:'./coverage/unit/',file: 'coverage.json'},
           'json-summary': {dir:'./coverage/unit/',file: 'json-summary.json'}
         }
       }
@@ -65,7 +65,7 @@ gulp.task("test-integration", ["pre-test"], function() {
         dir: './coverage/integration',
         reporters: [ 'lcov', 'json', 'json-summary' ],
         reportOpts: {
-          'json': {dir:'./coverage/integration/',file: 'converage.json'},
+          'json': {dir:'./coverage/integration/',file: 'coverage.json'},
           'json-summary': {dir:'./coverage/integration/',file: 'json-summary.json'}
         }
       }
