@@ -1,4 +1,3 @@
 node_modules/
 coverage/
-testResult/integration/*.json
-testResult/unit/*.json
+mochawesome-report/
