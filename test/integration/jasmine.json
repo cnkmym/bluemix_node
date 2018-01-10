@@ -1,7 +1,6 @@
 {
   "spec_dir": "./",
   "spec_files": [
-    "test/unit/**/*[sS]pec.js",
     "test/integration/**/*[sS]pec.js"
   ],
   "helpers": [

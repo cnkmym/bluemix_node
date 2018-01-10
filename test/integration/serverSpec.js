@@ -2,12 +2,10 @@
   'use strict';
 
   const request = require('request');
-  const app = require('../app/server.js');
-
+  const app = require(__dirname+'/../../app/server.js');
   const base_url = "http://localhost:" + (process.env.PORT || 3000);
 
-  describe("Server Route Test", () => {
-
+  describe("Server Integration Test", () => {
     describe("GET /", () => {
       it("returns status code 200", (done) => {
         request.get(base_url, (error, response, body) => {
@@ -15,7 +13,7 @@
           done();
         });
       });
-      it("contains valid html", (done) => {
+      it("contains valid text", (done) => {
         request.get(base_url, (error, response, body) => {
           expect(body).toContain("Hello, You are from");
           done();
@@ -34,7 +32,9 @@
     });
 
     afterAll(function() {
-      expect(app.closeServer()).toBe(true);
+      spyOn(app,"closeServer").and.callThrough();
+      app.closeServer();
+      expect(app.closeServer).toHaveBeenCalled();
     });
   });
 }());
