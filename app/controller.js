@@ -33,7 +33,7 @@
     let length = (req.params) ? parseInt(req.params.seconds) : 0;
     console.log(`Ready to sleep current request handler on instance ${ipAddress} for ${length} seconds`);
     return sleepTimer(length * 1000).then(() => {
-      res.status(200).send(`Finish sleeping for ${length} seconds`);
+      res.status(200).send(`Finish sleeping for ${length} seconds on ${ipAddress}`);
     });
   };
 
