@@ -1,6 +1,6 @@
 ---
   applications:
   - name: sample-1131
-    memory: 64M
+    memory: 32M
     instances: 1
     health-check-type: process
