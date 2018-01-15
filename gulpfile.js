@@ -28,7 +28,7 @@ gulp.task("test", ["pre-test"], function() {
         }
       }
     ))
-    .pipe(istanbul.enforceThresholds({ thresholds: { global: 90 } }));
+    .pipe(istanbul.enforceThresholds({ thresholds: { global: 75 } }));
 });
 
 gulp.task("test-unit", ["pre-test"], function() {

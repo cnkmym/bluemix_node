@@ -6,7 +6,6 @@
   const bodyParser = require('body-parser');
   const errorhandler = require('errorhandler');
   const controller = require('./controller.js');
-  const version = require('../version.json');
 
   const app = express();
   app.use(logger('dev'));
@@ -18,6 +17,7 @@
 
   app.get('/api/whoami', controller.whoami);
   app.get('/api/crashme',  controller.crashme);
+  app.get('/api/sleep/:seconds',  controller.sleep);
   app.get('/', controller.general);
 
   if (process.env.VCAP_SERVICES) {
@@ -25,6 +25,7 @@
   }
 
   const port = process.env.PORT || 3000;
+
   const server = app.listen(port, (error) => {
     /* istanbul ignore if */
     if (error) {
@@ -32,14 +33,15 @@
       process.exit(1);
     } else {
       console.log(`Server is running and listening on port ${port}`);
-      console.log(`Current Code version is ${version.branch}`);
     }
   });
 
   const closeServer = () => {
-    server.close(() => {
-      console.log("Server is shutdown");
-    });
+    if (server){
+      server.close(() => {
+        console.log("Server is shutdown");
+      });
+    }
   };
 
   module.exports = {

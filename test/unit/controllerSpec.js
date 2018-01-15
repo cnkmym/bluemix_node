@@ -4,6 +4,7 @@
   const controller = require(__dirname + '/../../app/controller.js');
   const chai = require('chai');
   const spies = require('chai-spies');
+  const app = require(__dirname + '/../../app/server.js');
 
   chai.use(spies);
   var expect = chai.expect;
@@ -52,6 +53,26 @@
       expect(resBody).to.include('I am server instance on');
     });
 
+    it("method sleep should work", () => {
+      const route = controller.sleep;
+      let resStatus = -1;
+      let resBody = "";
+      const resMock = {
+        "status": (code) => {
+          resStatus = code;
+          return {
+            "send": (body) => {
+              resBody = body;
+            }
+          };
+        }
+      };
+      return route("", resMock).then(()=>{
+        expect(resStatus).to.equal(200);
+        expect(resBody).to.include('Finish sleeping for');
+      });
+    });
+
     it("method crashme should work", () => {
       let crashMethod = chai.spy(() => {
         console.log("Unit Test");
@@ -61,6 +82,10 @@
       expect(crashMethod).to.have.been.called();
     });
 
+    after(function (done) {
+        app.closeServer();
+        done();
+    });
   });
 
 }());
