@@ -17,7 +17,7 @@
   app.use(errorhandler());
 
   app.get('/api/whoami', controller.whoami);
-  app.get('/api/crashme', controller.crashme);
+  app.get('/api/crashme',  controller.crashme);
   app.get('/', controller.general);
 
   if (process.env.VCAP_SERVICES) {

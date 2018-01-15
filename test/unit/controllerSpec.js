@@ -53,11 +53,11 @@
     });
 
     it("method crashme should work", () => {
-      let route = controller.crashme;
       let crashMethod = chai.spy(() => {
         console.log("Unit Test");
       });
-      route("", "", "", crashMethod);
+      controller.setProcessKill(crashMethod);
+      controller.crashme();
       expect(crashMethod).to.have.been.called();
     });
 
