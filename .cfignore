@@ -1,0 +1,4 @@
+coverage/
+testResult/
+pipeline/
+node_modules/
