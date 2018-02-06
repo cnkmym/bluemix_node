@@ -3,6 +3,7 @@
 
   const ip = require('ip');
   const sleepTimer = require('sleep-promise');
+  const calculator = require('./home/calculator.js');
 
   const whoami = (req, res) => {
     const ipAddress = ip.address();
@@ -53,11 +54,21 @@
     // res.status(200).send(`Hello, You are from <Remote IP>${REMOTE_IP}  <Bluemix LB IP>${BLUEMIX_LB_IP}\r\n`);
   };
 
+  const calcPI = (req,res)=>{
+    // real logic
+    // let length = (req.params) ? parseInt(req.params.digits) : 2;
+    // hard code PI string digit length
+    let length = 2;
+    //console.log(calculator);
+    res.status(200).send(calculator.calcPI(length));
+  };
+
   module.exports = {
     'whoami': whoami,
     'crashme': crashme,
     'setProcessKill': setProcessKill,
     'sleep': sleep,
+    'calcPI': calcPI,
     'general': general
   };
 }());

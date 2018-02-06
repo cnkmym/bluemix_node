@@ -19,6 +19,7 @@
   app.get('/api/whoami', controller.whoami);
   app.get('/api/crashme',  controller.crashme);
   app.get('/api/sleep/:seconds',  controller.sleep);
+  app.get('/api/calcpi/:digits',  controller.calcPI);
   app.get('/', controller.general);
 
   if (process.env.VCAP_SERVICES) {

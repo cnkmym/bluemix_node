@@ -66,6 +66,25 @@
       });
     });
 
+    it("method calcPI should work", () => {
+      const route = controller.calcPI;
+      let resStatus = -1;
+      let resBody = "";
+      const resMock = {
+        "status": (code) => {
+          resStatus = code;
+          return {
+            "send": (body) => {
+              resBody = body;
+            }
+          };
+        }
+      };
+      route("", resMock);
+      expect(resStatus).to.equal(200);
+      expect(resBody).to.include('3.14');
+    });
+
     it("method crashme should work", () => {
       let crashMethod = chai.spy(() => {
         console.log("Unit Test");
