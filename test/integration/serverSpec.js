@@ -44,8 +44,8 @@
     });
 
     after(function(done) {
-      //app.closeServer();
-      //done();
+      app.closeServer();
+      done();
     });
   });
 }());
