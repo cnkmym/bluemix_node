@@ -17,21 +17,14 @@
           'x-forwarded-for': ["localhost1", "remotehost2"]
         }
       };
-      let resStatus = -1;
       let resBody = "";
       const resMock = {
-        "status": (code) => {
-          resStatus = code;
-          return {
-            "send": (body) => {
-              resBody = body;
-            }
-          };
+        "sendFile": (body,opt) => {
+          resBody = body;
         }
       };
       route(reqMock, resMock);
-      expect(resStatus).to.equal(200);
-      expect(resBody).to.include('Hello, You are from');
+      expect(resBody).to.include('index.html');
     });
 
     it("method whoami should work", () => {

@@ -21,7 +21,7 @@
       });
       it("contains valid text", (done) => {
         request.get(base_url, (error, response, body) => {
-          expect(body).to.include("Hello, You are from");
+          expect(body).to.include("Bluemix Evaluation");
           done();
         });
       });
@@ -44,8 +44,8 @@
     });
 
     after(function(done) {
-      app.closeServer();
-      done();
+      //app.closeServer();
+      //done();
     });
   });
 }());
