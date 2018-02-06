@@ -14,6 +14,7 @@
     'extended': false
   }));
   app.use(errorhandler());
+  app.use('/public', express.static('public'));
 
   app.get('/api/whoami', controller.whoami);
   app.get('/api/crashme',  controller.crashme);

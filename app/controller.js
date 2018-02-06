@@ -49,7 +49,8 @@
       //local mode
       REMOTE_IP = ips;
     }
-    res.status(200).send(`Hello, You are from <Remote IP>${REMOTE_IP}  <Bluemix LB IP>${BLUEMIX_LB_IP}\r\n`);
+    res.sendFile("home/index.html", { root: __dirname});
+    // res.status(200).send(`Hello, You are from <Remote IP>${REMOTE_IP}  <Bluemix LB IP>${BLUEMIX_LB_IP}\r\n`);
   };
 
   module.exports = {
