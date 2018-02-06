@@ -29,6 +29,15 @@ $("a.sleep-300").click(function(){
     }});
 });
 
+$("input.pi").change(function(){
+  var value = $(this).val() || 2;
+  $("td.pi").html('Calculating ...');
+  $.ajax({url: "/api/calcpi/"+value, success: function(result){
+    // $("input.pi").removeClass("disabled").addClass("btn-warning");
+    $("td.pi").html(result);
+  }});
+});
+
 $("a.crashme").click(function(){
     $("td.crashme").html('<span style="color:grey">Force Shutdown</span>');
     $.ajax({url: "/api/crashme", error: function(result){

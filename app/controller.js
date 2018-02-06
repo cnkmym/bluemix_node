@@ -56,7 +56,7 @@
 
   const calcPI = (req,res)=>{
     // real logic
-    // let length = (req.params) ? parseInt(req.params.digits) : 2;
+    //let length = (req.params) ? parseInt(req.params.digits) : 2;
     // hard code PI string digit length
     let length = 2;
     //console.log(calculator);
