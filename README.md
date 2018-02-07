@@ -21,5 +21,15 @@ Note: When new server is up and running, logs are as follows:
 
 (3) convenience of CI/CD process and its performance
 Red/Black Deployment Pipeline:
+Note: during Prod deployment, Prod traffic will NOT Fail. This process needs to be kicked manually.
+(The "launch point" is "Build" Phase itself, also possible to set it to "PRODUCTION switch" phase.)
+Pipeline URL: https://console.bluemix.net/devops/pipelines/39fe4101-9e4b-4d5d-b0df-8d913239a0c5?env_id=ibm:yp:us-south
+Staging URL: http://staging-sample-1132.mybluemix.net/
+Prod URL: https://prod-sample-1132.mybluemix.net/#
 
 Full Gateway Deployment Pipeline:
+Note: during Prod deployment, Prod traffic will all fail
+Pipeline URL : https://console.bluemix.net/devops/pipelines/a62dac83-ec58-45aa-87cb-0ff23535f498?env_id=ibm:yp:us-south
+This process will hook GitHub change (master branch) automatically.
+Prod URL :https://sample-1140.mybluemix.net/#
+Gate Review URL : https://console.bluemix.net/devops/insights/?env_id=ibm:yp:us-south#!/deploymentrisk?orgName=ye%40metlife.co.jp&toolchainId=d3fc2c6e-d347-473f-9a66-32ad79e1512b

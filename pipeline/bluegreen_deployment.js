@@ -19,13 +19,19 @@ export BACKUP_APP_NAME="backup-$CF_APP"
 
 # Step-3.1: Map production route to Staging environment
 cf map-route "${STAGING_APP_NAME}" "mybluemix.net" -n "${PROD_APP_NAME}"
+
 # Step-3.2: Unmap staging route to Staging environment
 cf unmap-route "${STAGING_APP_NAME}" "mybluemix.net" -n "${STAGING_APP_NAME}"
+
 # Step-3.3: Unmap production route to Production environment
 cf app "${PROD_APP_NAME}" && cf unmap-route "${PROD_APP_NAME}" "mybluemix.net" -n "${PROD_APP_NAME}"
+
+# Step-3.4: Map backup route to (old) Production environment
 cf app "${PROD_APP_NAME}" && cf map-route "${PROD_APP_NAME}" "mybluemix.net" -n "${BACKUP_APP_NAME}"
-# Step-3.4: Rename (old) Production environment to Backup
+
+# Step-3.5: Delete (old) Backup environment and rename (old) Production environment to "Backup"
 cf app "${BACKUP_APP_NAME}" && cf delete -f "${BACKUP_APP_NAME}"
 cf app "${PROD_APP_NAME}" && cf rename "${PROD_APP_NAME}" "${BACKUP_APP_NAME}"
-# Step-3.5: Rename Staging environment to Prodution
+
+# Step-3.6: Rename Staging environment to (new) "Prodution"
 cf rename "${STAGING_APP_NAME}" "${PROD_APP_NAME}"
