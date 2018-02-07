@@ -1,9 +1,11 @@
 $("a.whoami").click(function(){
     $("ad.whoami").html('<span style="color:grey">Loading Server Instance IP ...</span>');
+    $(this).addClass("disabled btn-default").removeClass("btn-info");
     $.ajax({url: "/api/whoami", success: function(result){
       var dt = new Date();
       var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
       $("td.whoami").html(result + "   @ "+time);
+      $("a.whoami").removeClass("disabled btn-default").addClass("btn-success");
     }});
 });
 
@@ -39,7 +41,7 @@ $("input.pi").change(function(){
 });
 
 $("a.crashme").click(function(){
-    $("td.crashme").html('<span style="color:grey">Force Shutdown</span>');
+    $("td.crashme").html('<span style="color:grey">Prepare for Server shutdown</span>');
     $.ajax({url: "/api/crashme", error: function(result){
       var dt = new Date();
       var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();

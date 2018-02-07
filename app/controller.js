@@ -21,7 +21,7 @@
 
   const crashme = (req, res, next) => {
     const ipAddress = ip.address();
-    console.log(`Ready to crash server instance on ${ipAddress}`);
+    console.log(`Ready to crash server instance at ${ipAddress}`);
     /* istanbul ignore next */
     const callback = _getProcessKill() || function() {
       process.exit(0);

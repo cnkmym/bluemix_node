@@ -5,6 +5,7 @@
   const logger = require('morgan');
   const bodyParser = require('body-parser');
   const errorhandler = require('errorhandler');
+  const ip = require('ip');
   const controller = require('./controller.js');
 
   const app = express();
@@ -25,7 +26,8 @@
   if (process.env.VCAP_SERVICES) {
     console.log(JSON.parse(process.env.VCAP_SERVICES));
   }
-
+  
+  const ipAddress = ip.address();
   const port = process.env.PORT || 3000;
 
   const server = app.listen(port, (error) => {
@@ -34,7 +36,7 @@
       console.error(error.message);
       process.exit(1);
     } else {
-      console.log(`Server is running and listening on port ${port}`);
+      console.log(`Server is running at ${ipAddress} and listening on port ${port}`);
     }
   });
 
