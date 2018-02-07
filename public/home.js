@@ -5,7 +5,7 @@ $("a.whoami").click(function(){
       var dt = new Date();
       var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
       $("td.whoami").html(result + "   @ "+time);
-      $("a.whoami").removeClass("disabled btn-default").addClass("btn-success");
+      $("a.whoami").removeClass("disabled btn-default").addClass("btn-info");
     }});
 });
 
