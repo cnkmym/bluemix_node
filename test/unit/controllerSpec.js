@@ -19,7 +19,7 @@
       };
       let resBody = "";
       const resMock = {
-        "sendFile": (body,opt) => {
+        "sendFile": (body, opt) => {
           resBody = body;
         }
       };
@@ -60,13 +60,13 @@
           };
         }
       };
-      return route("", resMock).then(()=>{
+      return route("", resMock).then(() => {
         expect(resStatus).to.equal(200);
         expect(resBody).to.include('Finish sleeping for');
       });
     });
 
-    it("method calcPI should work", () => {
+    it("method calcPI should work when no digits defined", () => {
       const route = controller.calcPI;
       let resStatus = -1;
       let resBody = "";
@@ -85,6 +85,29 @@
       expect(resBody).to.include('3.14');
     });
 
+    it("method calcPI should work when digits is defined", () => {
+      const route = controller.calcPI;
+      let resStatus = -1;
+      let resBody = "";
+      const resMock = {
+        "status": (code) => {
+          resStatus = code;
+          return {
+            "send": (body) => {
+              resBody = body;
+            }
+          };
+        }
+      };
+      route({
+        'params': {
+          'digits': 5
+        }
+      }, resMock);
+      expect(resStatus).to.equal(200);
+      expect(resBody).to.include('3.14159');
+    });
+
     it("method crashme should work", () => {
       let crashMethod = chai.spy(() => {
         console.log("Unit Test");
@@ -94,9 +117,9 @@
       expect(crashMethod).to.have.been.called();
     });
 
-    after(function (done) {
-        app.closeServer();
-        done();
+    after(function(done) {
+      app.closeServer();
+      done();
     });
   });
 
