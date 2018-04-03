@@ -6,6 +6,7 @@
   const bodyParser = require('body-parser');
   const errorhandler = require('errorhandler');
   const ip = require('ip');
+  const path = require('path');
   const controller = require('./controller.js');
 
   const app = express();
@@ -15,12 +16,11 @@
     'extended': false
   }));
   app.use(errorhandler());
-  app.use('/public', express.static('public'));
-  app.use('/asset', express.static('public'));
+  app.use('/public', express.static('./public'));
   app.get('/api/whoami', controller.whoami);
-  app.get('/api/crashme',  controller.crashme);
-  app.get('/api/sleep/:seconds',  controller.sleep);
-  app.get('/api/calcpi/:digits',  controller.calcPI);
+  app.get('/api/crashme', controller.crashme);
+  app.get('/api/sleep/:seconds', controller.sleep);
+  app.get('/api/calcpi/:digits', controller.calcPI);
   app.get('/', controller.general);
 
   if (process.env.VCAP_SERVICES) {
@@ -41,7 +41,7 @@
   });
 
   const closeServer = () => {
-    if (server){
+    if (server) {
       server.close(() => {
         console.log("Server is shutdown");
       });
