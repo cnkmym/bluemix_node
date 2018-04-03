@@ -34,7 +34,7 @@ $("a.sleep-300").click(function(){
 $("input.pi").change(function(){
   var value = $(this).val() || 2;
   $("td.pi").html('Calculating ...');
-  $.ajax({url: "/api/calcpi/2/"+value, cache:false, success: function(result){
+  $.ajax({url: "/api/calcpi/"+value, cache:false, success: function(result){
     $("td.pi").html(result);
   }});
 });
