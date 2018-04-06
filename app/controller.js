@@ -6,8 +6,13 @@
   const calculator = require('./home/calculator.js');
 
   const whoami = (req, res) => {
-    const ipAddress = ip.address();
-    res.status(200).send(`I am server instance on ${ipAddress}\r\n`);
+    let ipAddress = ip.address();
+    if (ipAddress !== undefined && ipAddress !== '') {
+      res.status(200).send(`I am server instance on ${ipAddress}\r\n`);
+    } else {
+      let instanceId = process.env.WEBSITE_INSTANCE_ID;
+      res.status(200).send(`My WebApp Instance Id is ${instanceId}\r\n`);
+    }
   };
 
   let _processKiller;
@@ -50,11 +55,13 @@
       //local mode
       REMOTE_IP = ips;
     }
-    res.sendFile("home/index.html", { root: __dirname});
+    res.sendFile("home/index.html", {
+      root: __dirname
+    });
     // res.status(200).send(`Hello, You are from <Remote IP>${REMOTE_IP}  <Bluemix LB IP>${BLUEMIX_LB_IP}\r\n`);
   };
 
-  const calcPI = (req,res)=>{
+  const calcPI = (req, res) => {
     // real logic
     let length = (req.params) ? parseInt(req.params.digits) : 2;
     // hard code PI string digit length
