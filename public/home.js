@@ -20,7 +20,7 @@ $("a.sleep-10").click(function(){
     }});
 });
 
-$("a.sleep-300").click(function(){
+$("a.sleep-100").click(function(){
     $(this).addClass("disabled btn-default").removeClass("btn-warning");
     $("td.sleep-100 ").html('<span style="color:grey">Timer Start</span>');
     $.ajax({url: "/api/sleep/100", cache:false, success: function(result){
