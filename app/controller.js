@@ -25,8 +25,8 @@
   };
 
   const crashme = (req, res, next) => {
-    const ipAddress = ip.address();
-    console.log(`Ready to crash server instance at ${ipAddress}`);
+    const instanceId = process.env.WEBSITE_INSTANCE_ID;
+    console.log(`Ready to crash server instance (${instanceId})`);
     /* istanbul ignore next */
     const callback = _getProcessKill() || function() {
       process.exit(0);
@@ -35,11 +35,11 @@
   };
 
   const sleep = (req, res) => {
-    const ipAddress = ip.address();
+    const instanceId = process.env.WEBSITE_INSTANCE_ID;
     let length = (req.params) ? parseInt(req.params.seconds) : 0;
-    console.log(`Ready to sleep current request handler on instance ${ipAddress} for ${length} seconds`);
+    console.log(`Ready to sleep current request handler on instance (${instanceId}) for ${length} seconds`);
     return sleepTimer(length * 1000).then(() => {
-      res.status(200).send(`Finish sleeping for ${length} seconds on ${ipAddress}`);
+      res.status(200).send(`Finish sleeping for ${length} seconds on Instance (${instanceId})`);
     });
   };
 
