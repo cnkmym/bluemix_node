@@ -6,12 +6,12 @@
   const calculator = require('./home/calculator.js');
 
   const whoami = (req, res) => {
-    let ipAddress = ip.address();
-    if (ipAddress !== undefined && ipAddress !== '') {
-      res.status(200).send(`I am server instance on ${ipAddress}\r\n`);
-    } else {
-      let instanceId = process.env.WEBSITE_INSTANCE_ID;
+    let instanceId = process.env.WEBSITE_INSTANCE_ID;
+    if (instanceId !== undefined) {
       res.status(200).send(`My WebApp Instance Id is ${instanceId}\r\n`);
+    } else {
+      let ipAddress = ip.address();
+      res.status(200).send(`I am server instance on ${ipAddress}\r\n`);
     }
   };
 
