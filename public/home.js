@@ -23,7 +23,7 @@ $("a.sleep-10").click(function(){
 $("a.sleep-300").click(function(){
     $(this).addClass("disabled btn-default").removeClass("btn-warning");
     $("td.sleep-300 ").html('<span style="color:grey">Timer Start</span>');
-    $.ajax({url: "/api/sleep/100", cache:false, success: function(result){
+    $.ajax({url: "/api/sleep/300", cache:false, success: function(result){
       $("a.sleep-300").removeClass("disabled btn-default").addClass("btn-warning");
       var dt = new Date();
       var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
